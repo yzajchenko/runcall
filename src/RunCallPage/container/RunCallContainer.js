@@ -4,16 +4,16 @@ import api from "../../apiConfig";
 
 
 function RunCallContainer() {
-  
     const [runCall, setRunCall] = useState([]);
     const [pageSize, setPageSize] = useState(5);
     const [countPage, setCountPage] = useState(1);
+    const [search, setSearch] = useState("");
     const [numberPage, setNumberPage] = useState(1);
     const [sorts, setSorts] = useState("-comment");
 
     useEffect(() => {
         setCountPage(Math.ceil(10001 / pageSize));
-        api.get(`?Page=${numberPage}&&PageSize=${pageSize}&&sorts=${sorts}`).then((resp) => {
+        api.get(`?Page=${numberPage}&&PageSize=${pageSize}&&sorts=${sorts}&&filters=phone|comment@=${search}`).then((resp) => {
             const runCallRes = resp.data;
             const runCallNew = runCallRes.map((item)=>{
                 const data = new Date(item.dateCreated);
@@ -62,7 +62,7 @@ function RunCallContainer() {
 
             setRunCall(runCallNew);
         });
-    }, [pageSize, numberPage, sorts]); 
+    }, [pageSize, numberPage, sorts, search]); 
 
     const handleChange = (event) => {
         setPageSize(event.target.value);
@@ -70,6 +70,10 @@ function RunCallContainer() {
 
     const handleChangeSorts = (event) => {
         setSorts(event.target.value);
+    };
+
+    const handleChangeSearch = (event) => {
+        setSearch(event.target.value);
     };
 
     const handleChangeToPage = 
@@ -80,7 +84,7 @@ function RunCallContainer() {
 
     return (
         <RunCallLayout runCall={runCall} handleChangeSorts={handleChangeSorts} sorts={sorts} countPage={countPage} handleChange={handleChange} pageSize={pageSize}
-        handleChangeToPage={event => handleChangeToPage(event)}/>
+        handleChangeToPage={event => handleChangeToPage(event)} handleChangeSearch={handleChangeSearch} search={search}/>
     );
   }
 

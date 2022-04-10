@@ -11,6 +11,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
 
 import PaginationRunCall from "../PaginationRunCall";
 
@@ -23,7 +24,10 @@ const RunCallLayout = ({
   handleChange,
   pageSize,
   handleChangeSorts,
-  sorts
+  sorts,
+  handleChangeSearch,
+  search
+
 }) => {
   return (
     <>
@@ -64,6 +68,8 @@ const RunCallLayout = ({
           <MenuItem value={"dateCreated"}>Дата создания по возрастанию</MenuItem>
         </Select>
       </FormControl>
+
+      <TextField id="outlined-basic" label="Поиск" variant="outlined" onChange={handleChangeSearch} value={search} />
     
 
 <TableContainer component={Paper}>
