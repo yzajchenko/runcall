@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://test.runcall.ru/Api/GetCallResults";
+const baseURL = "http://test.runcall.ru/Api/";
 
 const apiConfig = {
   baseURL,
@@ -8,9 +8,9 @@ const apiConfig = {
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    Pragma: "no-cache"
+    Pragma: "no-cache",
   },
-  params: {}
+  params: {},
 };
 
 export default axios.create(apiConfig);
